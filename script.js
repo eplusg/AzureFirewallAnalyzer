@@ -91,6 +91,11 @@ function sortRules(rules) {
     });
 }
 
+function closeUsageWindow() {
+    document.getElementById('usageWindow').style.display = 'none';
+}
+
+
 function displayRulesInTable(rules) {
     const rulesList = document.getElementById('rulesList');
     rulesList.innerHTML = '';  // Clear existing content
@@ -98,16 +103,34 @@ function displayRulesInTable(rules) {
 
     rules.forEach(item => {
         // Extract and format rule details
-        // Use item.actionType directly as it's already included in the rule object
         const actionType = item.actionType;
         const sourceAddresses = Array.isArray(item.rule.sourceAddresses) ? item.rule.sourceAddresses.join(', ') : 'N/A';
-        const destinationPorts = Array.isArray(item.rule.destinationPorts) ? item.rule.destinationPorts.join(', ') : 'N/A';
-        const ipProtocols = Array.isArray(item.rule.ipProtocols) ? item.rule.ipProtocols.join(', ') : 'N/A';
         
-        // Check for FQDNs and Addresses
-        const destinationAddresses = Array.isArray(item.rule.destinationAddresses) && item.rule.destinationAddresses.length > 0 
-            ? item.rule.destinationAddresses.join(', ') 
-            : (Array.isArray(item.rule.destinationFqdns) && item.rule.destinationFqdns.length > 0 ? item.rule.destinationFqdns.join(', ') : 'N/A');
+        // Initialize destination ports and protocols
+        let destinationPorts = 'N/A';
+        let ipProtocols = 'N/A';
+        let destinationAddresses = 'N/A';
+
+        if (item.rule.ruleType === 'ApplicationRule') {
+            // Handle ApplicationRule specific protocol and port structure
+            if (Array.isArray(item.rule.protocols) && item.rule.protocols.length > 0) {
+                destinationPorts = item.rule.protocols.map(p => p.port).join(', ');
+                ipProtocols = item.rule.protocols.map(p => p.protocolType).join(', ');
+            }
+            // Handle ApplicationRule specific destinations
+            if (Array.isArray(item.rule.targetFqdns) && item.rule.targetFqdns.length > 0) {
+                destinationAddresses = item.rule.targetFqdns.join(', ');
+            } else if (Array.isArray(item.rule.targetUrls) && item.rule.targetUrls.length > 0) {
+                destinationAddresses = item.rule.targetUrls.join(', ');
+            }
+        } else {
+            // Handle other rule types
+            destinationPorts = Array.isArray(item.rule.destinationPorts) ? item.rule.destinationPorts.join(', ') : 'N/A';
+            ipProtocols = Array.isArray(item.rule.ipProtocols) ? item.rule.ipProtocols.join(', ') : 'N/A';
+            destinationAddresses = Array.isArray(item.rule.destinationAddresses) && item.rule.destinationAddresses.length > 0 
+                ? item.rule.destinationAddresses.join(', ') 
+                : (Array.isArray(item.rule.destinationFqdns) && item.rule.destinationFqdns.length > 0 ? item.rule.destinationFqdns.join(', ') : 'N/A');
+        }
 
         // Create a new table row element
         const row = document.createElement('tr');
@@ -137,4 +160,3 @@ function displayRulesInTable(rules) {
     // Make the table visible
     document.getElementById('rulesTable').style.display = 'table';
 }
-
