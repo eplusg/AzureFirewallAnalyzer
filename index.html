@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azure Firewall Rules Analyzer</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Azure Firewall Rules Analyzer</h1>
+    <p>Import Azure Firewall Policy in JSON format.</p>
+    <input type="file" id="fileInput" accept=".json" />
+    <table id="rulesTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>Rule Order</th>
+                <th>Rule Collection Group Name</th>
+                <th>Group Priority</th>
+                <th>Collection Name</th>
+                <th>Collection Priority</th>
+                <th>Rule Name</th>
+                <th>Rule Type</th>
+                <th>Source</th>
+                <th>Port</th>
+                <th>Protocol</th>
+                <th>Destination</th>
+                <th>Action</th>
+            </tr>
+        </thead>     
+        <tbody id="rulesList">
+            <!-- Rule rows will be added here -->
+        </tbody>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+    font-size: 14px;
+    color: #333;
+}
+
+h1 {
+    font-size: 36px;
+    color: #0056a3; /* A modern color */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Adds spacing between letters */
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    display: block;
+    padding: 10px 15px;
+    margin: 10px auto;
+    background-color: #0078D4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="file"]:hover {
+    background-color: #0056a3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #0078D4;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.natrule {
+    background-color: #ffffcc; /* Light yellow for NAT rule collections */
+}
+
+.networkrule {
+    background-color: #ccffff; /* Light blue for Network rule collections */
+}
+
+.applicationrule {
+    background-color: #e6ccff; /* Light purple for Application rule collections */
+}
+
+.deny-action {
+    color: #ff0000; /* Red text for Deny actions */
+}
+
+.allow-action {
+    color: #008000; /* Green text for Allow actions */
+}
